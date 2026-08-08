@@ -1,5 +1,5 @@
 import heroImage from "@/assets/hero-addis.jpg";
-import heroVideo from "@/assets/hero-addis.mp4.asset.json";
+import heroVideo from "@/assets/hero-addis.mp4";
 import { useI18n } from "@/lib/i18n";
 
 export function Hero() {
@@ -16,7 +16,7 @@ export function Hero() {
       />
       <video
         className="absolute inset-0 h-full w-full object-cover"
-        src={heroVideo.url}
+        src={heroVideo}
         poster={heroImage}
         autoPlay
         muted
