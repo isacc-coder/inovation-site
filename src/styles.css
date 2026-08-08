@@ -1,0 +1,170 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-gold: var(--gold);
+  --color-emerald-deep: var(--emerald-deep);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --font-display: "Bevan", Georgia, serif;
+  --font-sans: "Figtree", "Noto Sans Ethiopic", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.25rem;
+
+  /* Addis night — near-black with a warm cast */
+  --background: oklch(0.16 0.012 60);
+  --foreground: oklch(0.97 0.008 80);
+  --surface: oklch(0.2 0.014 60);
+  --surface-raised: oklch(0.245 0.018 58);
+
+  --card: oklch(0.2 0.014 60);
+  --card-foreground: oklch(0.97 0.008 80);
+  --popover: oklch(0.2 0.014 60);
+  --popover-foreground: oklch(0.97 0.008 80);
+
+  /* Craft Addis burnt orange */
+  --primary: #2BB389;
+  --primary-foreground: oklch(0.16 0.012 60);
+
+  --secondary: oklch(0.245 0.018 58);
+  --secondary-foreground: oklch(0.97 0.008 80);
+  --muted: oklch(0.245 0.018 58);
+  --muted-foreground: oklch(0.72 0.018 70);
+  --accent: #2BB389;
+  --accent-foreground: oklch(0.16 0.012 60);
+
+  /* Ethiopian flag-inspired supporting tones */
+  --gold: oklch(0.82 0.145 82);
+  --emerald-deep: oklch(0.52 0.11 158);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(0.32 0.02 60);
+  --input: oklch(0.32 0.02 60);
+  --ring: #2BB389;
+}
+
+.dark {
+  --background: oklch(0.16 0.012 60);
+  --foreground: oklch(0.97 0.008 80);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.02;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+@utility ink-veil {
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--background) 55%, transparent),
+    color-mix(in oklab, var(--background) 78%, transparent) 55%,
+    var(--background)
+  );
+}
+
+@utility tibeb-rule {
+  height: 4px;
+  background-image: linear-gradient(
+    90deg,
+    var(--primary) 0%,
+    color-mix(in oklab, var(--primary) 45%, transparent) 60%,
+    transparent 100%
+  );
+}
+
+@utility card-panel {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  transition:
+    border-color 0.35s ease,
+    background-color 0.35s ease,
+    transform 0.35s ease;
+}
+
+@utility card-panel-hover {
+  &:hover {
+    background-color: var(--surface-raised);
+    border-color: color-mix(in oklab, var(--primary) 60%, transparent);
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility rise-in {
+  animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
